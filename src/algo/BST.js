@@ -183,6 +183,12 @@ export default class BST extends Algorithm {
 		this.succButton.onclick = () => (this.predSucc = 'succ');
 		this.succButton.checked = true;
 		this.predSucc = 'succ';
+
+		addDivisorToAlgorithmBar();
+
+		this.fillButton = addControlToAlgorithmBar('Button', 'Fill');
+		this.fillButton.onclick = this.fillCallback.bind(this);
+		this.controls.push(this.fillButton);
 	}
 
 	reset() {
@@ -224,6 +230,10 @@ export default class BST extends Algorithm {
 
 	clearCallback() {
 		this.implementAction(this.clear.bind(this));
+	}
+
+	fillCallback() {
+		this.implementAction(this.fillH.bind(this, 1));
 	}
 
 	sizeChanged(newWidth) {
@@ -907,6 +917,19 @@ export default class BST extends Algorithm {
 		return this.commands;
 	}
 
+	fillH() {
+		// this.clear();
+		// console.log('here');
+		// this.add(10);
+		this.commands = [];
+		this.clearOldObjects();
+		this.cmd(act.setText, 0, 'Filling with random data');
+		// this.implementAction(this.add.bind(this), parseInt(1));
+		// for (let i = 0; i < 10; i++) {
+		// }
+		// this.commands = [];
+	}
+
 	recClear(curr) {
 		if (curr != null) {
 			this.cmd(act.delete, curr.graphicID);
@@ -926,35 +949,6 @@ export default class BST extends Algorithm {
 			this.controls[i].disabled = false;
 		}
 	}
-
-	// Refactored to superclass
-
-	// setUpPseudocode(tailoredCode) {
-	// 	this.code = tailoredCode;
-
-	// 	this.codeID = Array(this.code.length);
-	// 	let i, j;
-	// 	for (i = 0; i < this.code.length; i++) {
-	// 		this.codeID[i] = new Array(this.code[i].length);
-	// 		for (j = 0; j < this.code[i].length; j++) {
-	// 			this.codeID[i][j] = this.nextIndex++;
-	// 			this.cmd(
-	// 				act.createLabel,
-	// 				this.codeID[i][j],
-	// 				this.code[i][j],
-	// 				CODE_START_X,
-	// 				CODE_START_Y + i * CODE_LINE_HEIGHT,
-	// 				0,
-	// 			);
-	// 			this.cmd(act.setForegroundColor, this.codeID[i][j], CODE_STANDARD_COLOR);
-	// 			if (j > 0) {
-	// 				this.cmd(act.alignRight, this.codeID[i][j], this.codeID[i][j - 1]);
-	// 			}
-	// 		}
-	// 	}
-
-	// 	return this.codeID;
-	// }
 
 	highlight(ind1, ind2) {
 		this.cmd(act.setForegroundColor, this.codeID[ind1][ind2], CODE_HIGHLIGHT_COLOR);

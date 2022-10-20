@@ -88,7 +88,6 @@ class AlgoScreen extends React.Component {
 								></button>
 							)}
 						</div>
-
 						<div className="viewport">
 							<canvas
 								id="canvas"
@@ -102,7 +101,6 @@ class AlgoScreen extends React.Component {
 								</div>
 							)}
 						</div>
-
 						<div id="generalAnimationControlSection">
 							<table id="GeneralAnimationControls" ref={this.animBarRef}></table>
 						</div>
